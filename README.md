@@ -12,3 +12,33 @@ Bu projede HTTP proxy entegrasyonu kullanılarak inşa edilecek olan Gateway Api
 | Test Süreci       | Test süreci ve sonuçların analizi yapılacak          |
 | Amaç               | API'nin düzgün çalışmasını sağlamak                   |
 
+
+# Use Case Diyagramı:
+
+                                            +----------------+
+                                            |                |
+                                            |  News Scraper  |
+                                            |                |
+                                            +--------+-------+
+                                                     |
+                                                     |
+                           +--------------------------|---------------------------+
+                           |                         |                         |
+                           |                         |                         |
+                           |                         |                         |
+        +------------------+                  +-------v-------+            +-------v-------+
+        |                  |                  |               |            |               |
+        |  Express Server  +----------------->+   Newspaper   |            |   Newspaper   |
+        |                  |                  |               |            |               |
+        +--------+---------+                  +-------+-------+            +-------+-------+
+                 |                                   |                         |
+                 |                                   |                         |
+                 |                                   |                         |
+        +--------v---------+                  +-------v-------+            +-------v-------+
+        |                  |                  |               |            |               |
+        |  Axios & Cheerio +----------------->+   Article    |            |   Article    |
+        |                  |                  |               |            |               |
+        +------------------+                  +---------------+            +---------------+
+
+> Bu diyagramda API, Gazete web sitelerine HTTP istekleri göndermek ve Makale bağlantılarını çıkarmak için ortaya çıkan HTML'yi ayrıştırmak için Axios ve Cheerio kütüphanelerini kullanan Express Sunucusu ile etkileşim halindedir. Ekspres Sunucu, 8000 numaralı bağlantı noktasındaki HTTP isteklerini dinler ve tüm gazetelerden topladığı makalelerin listesiyle veya uygun uç nokta talep edilirse belirli bir gazeteden makalelerin listesiyle yanıt verir.
+
